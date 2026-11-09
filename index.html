@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison — Restaurant & Café</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+    FRESHLY PREPARED · MADE WITH CARE · DELIVERED TO YOUR DOOR
+</div>
+
+<header>
+    <div class="wrap nav">
+        <a class="brand" href="#">maison<span>.</span></a>
+
+        <nav class="navlinks">
+            <a href="#menu">Our menu</a>
+            <a href="#story">Our story</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="pill light" onclick="openAdmin()">Manage</button>
+            <button class="pill dark cart-btn" onclick="openCart()">
+                Your order <span class="count" id="cartCount">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<section class="hero">
+    <div class="wrap hero-grid">
+
+        <div>
+            <div class="eyebrow">A little taste of happiness</div>
+
+            <h1>Good food.<br><em>Good mood.</em></h1>
+
+            <p>
+                Thoughtful ingredients, beautiful flavours and food
+                made fresh every day. Find your new favourite,
+                then let us bring it to you.
+            </p>
+
+            <div class="hero-buttons">
+                <a class="pill dark" href="#menu">Explore the menu ↗</a>
+                <button class="pill light" onclick="openCart()">Order online</button>
+            </div>
+
+            <div class="hero-note">
+                ✦ Fresh ingredients
+                ✦ Made to order
+                ✦ Kigali delivery
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85"
+                 alt="Restaurant dining table">
+            <div class="image-tag">Made fresh. Served with love.</div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="menu">
+    <div class="wrap">
+
+        <div class="section-head">
+            <div>
+                <div class="eyebrow">From our kitchen</div>
+                <h2>Made to make you smile.</h2>
+                <div class="sub">
+                    Explore our favourites, prepared fresh when you order.
+                </div>
+            </div>
+
+            <div class="sub">Menu updated daily ✦</div>
+        </div>
+
+        <div class="categories" id="categories"></div>
+        <div class="menu-grid" id="menuGrid"></div>
+
+    </div>
+</section>
+
+<section class="section about" id="story">
+    <div class="wrap about-grid">
+
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=85"
+                 alt="Restaurant interior">
+        </div>
+
+        <div>
+            <div class="eyebrow">The maison feeling</div>
+
+            <h2>Simple ingredients.<br>Beautiful moments.</h2>
+
+            <p class="sub">
+                We believe a good meal is more than food.
+                It is a pause in a busy day, a reason to gather
+                and a little moment worth remembering.
+                Our kitchen brings fresh ingredients and
+                thoughtful cooking together in every plate.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <b>Fresh every day</b>
+                    <span>Quality ingredients, prepared with care.</span>
+                </div>
+
+                <div class="feature">
+                    <b>Made for you</b>
+                    <span>Every order prepared when you ask.</span>
+                </div>
+
+                <div class="feature">
+                    <b>Easy ordering</b>
+                    <span>Choose your meal and delivery details.</span>
+                </div>
+
+                <div class="feature">
+                    <b>Warm service</b>
+                    <span>Good food, friendly people.</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="order-strip">
+    <div class="wrap order-inner">
+
+        <div>
+            <div class="eyebrow">Your next favourite meal</div>
+            <h2>Hungry? Let's fix that.</h2>
+            <p>Choose your favourites and place your order in a few easy steps.</p>
+        </div>
+
+        <a class="pill" href="#menu">Order now ↗</a>
+
+    </div>
+</section>
+
+</main>
+
+<footer id="contact">
+    <div class="wrap">
+
+        <div class="footer-grid">
+
+            <div>
+                <div class="brand">maison<span>.</span></div>
+                <p>Good food, good mood.<br>Come hungry. Leave happy.</p>
+            </div>
+
+            <div>
+                <b>Find us</b>
+                <p id="addressText">Kigali, Rwanda</p>
+            </div>
+
+            <div>
+                <b>Opening hours</b>
+                <p id="hoursText">Monday – Sunday<br>10:00 AM – 10:00 PM</p>
+            </div>
+
+            <div>
+                <b>Contact</b>
+                <p id="contactText">+250 000 000 000<br>hello@maison.rw</p>
+            </div>
+
+        </div>
+
+        <div class="foot-bottom">
+            <span>© <span id="year"></span> Maison Restaurant.</span>
+            <span>Fresh food, thoughtfully made.</span>
+        </div>
+
+    </div>
+</footer>
+
+<!-- SHOPPING CART -->
+
+<div class="overlay" id="cartOverlay" onclick="backdropClose(event,'cartOverlay')">
+    <div class="panel">
+
+        <div class="panel-head">
+            <h2>Your order</h2>
+            <button class="close" onclick="closeModal('cartOverlay')">×</button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="total">
+            <span>Total</span>
+            <span id="cartTotal">RWF 0</span>
+        </div>
+
+        <button class="pill dark" onclick="goCheckout()">
+            Continue to checkout →
+        </button>
+
+        <p class="muted">
+            Delivery fee will be confirmed by the restaurant.
+        </p>
+
+    </div>
+</div>
+
+<!-- CHECKOUT -->
+
+<div class="overlay" id="checkoutOverlay" onclick="backdropClose(event,'checkoutOverlay')">
+    <div class="panel">
+
+        <div class="panel-head">
+            <h2>Delivery details</h2>
+            <button class="close" onclick="closeModal('checkoutOverlay')">×</button>
+        </div>
+
+        <form id="checkoutForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Full name *</label>
+                    <input name="name" required placeholder="Your name">
+                </div>
+
+                <div class="field">
+                    <label>Phone number *</label>
+                    <input name="phone" required placeholder="+250..." type="tel">
+                </div>
+
+                <div class="field full">
+                    <label>Delivery address *</label>
+                    <input name="address" required placeholder="Street, building, house number">
+                </div>
+
+                <div class="field">
+                    <label>District / Area *</label>
+                    <input name="district" required placeholder="e.g. Remera, Kigali">
+                </div>
+
+                <div class="field">
+                    <label>Preferred delivery time</label>
+                    <select name="delivery">
+                        <option>As soon as possible</option>
+                        <option>In 1 hour</option>
+                        <option>In 2 hours</option>
+                        <option>Pickup at restaurant</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label>Payment method *</label>
+
+                    <div class="pay-options">
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="Cash on delivery" checked>
+                            Cash on delivery
+                        </label>
+
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="MTN Mobile Money">
+                            MTN Mobile Money
+                        </label>
+
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="Airtel Money">
+                            Airtel Money
+                        </label>
+
+                        <label class="pay-option">
+                            <input type="radio" name="payment" value="Card">
+                            Card payment
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field full">
+                    <label>Order notes (optional)</label>
+                    <textarea name="notes" rows="2"
+                        placeholder="Allergies, directions or special requests"></textarea>
+                </div>
+
+            </div>
+
+            <div class="notice">
+                Online payments are not connected yet.
+                The restaurant will contact you to confirm
+                Mobile Money or card payment instructions.
+                Never enter your payment PIN here.
+            </div>
+
+            <div class="total">
+                <span>Order total</span>
+                <span id="checkoutTotal">RWF 0</span>
+            </div>
+
+            <button class="pill dark" type="submit">
+                Place order ↗
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- ORDER SUCCESS -->
+
+<div class="overlay" id="successOverlay">
+    <div class="panel">
+
+        <div class="panel-head">
+            <h2>Order received!</h2>
+            <button class="close" onclick="closeModal('successOverlay')">×</button>
+        </div>
+
+        <div class="empty">
+            <div style="font-size:42px">✓</div>
+
+            <h3>Thank you for your order.</h3>
+
+            <p id="successText" class="sub"></p>
+
+            <p class="muted">
+                This demo saves orders in this browser.
+                A backend is needed to receive orders across devices.
+            </p>
+
+            <button class="pill dark" onclick="closeModal('successOverlay')">
+                Continue browsing
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ADMIN PANEL -->
+
+<div class="overlay" id="adminOverlay" onclick="backdropClose(event,'adminOverlay')">
+    <div class="panel wide">
+
+        <div class="panel-head">
+            <h2>Restaurant manager</h2>
+            <button class="close" onclick="closeModal('adminOverlay')">×</button>
+        </div>
+
+        <div id="adminLogin">
+
+            <p class="sub">
+                Manage your menu, restaurant details and orders.
+            </p>
+
+            <div class="field">
+                <label>Manager PIN</label>
+                <input id="adminPin" type="password" placeholder="Enter PIN (demo: 1234)">
+            </div>
+
+            <button class="pill dark" onclick="adminLogin()">
+                Unlock manager
+            </button>
+
+            <p class="muted">
+                Demo PIN is 1234. Replace this with secure authentication before launching.
+            </p>
+
+        </div>
+
+        <div id="adminArea" style="display:none">
+
+            <div class="admin-tabs">
+                <button class="active" onclick="adminTab('menuAdmin',this)">Menu items</button>
+                <button onclick="adminTab('settingsAdmin',this)">Restaurant details</button>
+                <button onclick="adminTab('ordersAdmin',this)">Orders</button>
+            </div>
+
+            <div id="menuAdmin">
+                <div id="adminMenuList"></div>
+
+                <h3>Add a menu item</h3>
+
+                <form id="addItemForm" class="form-grid">
+
+                    <div class="field">
+                        <label>Item name *</label>
+                        <input name="name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Price (RWF) *</label>
+                        <input name="price" type="number" min="1" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Category *</label>
+                        <input name="category" required placeholder="e.g. Mains">
+                    </div>
+
+                    <div class="field">
+                        <label>Image URL</label>
+                        <input name="image" placeholder="https://...">
+                    </div>
+
+                    <div class="field full">
+                        <label>Description</label>
+                        <input name="description">
+                    </div>
+
+                    <div class="field full">
+                        <button class="pill dark" type="submit">Add menu item +</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div id="settingsAdmin" style="display:none">
+                <form id="settingsForm">
+
+                    <div class="field">
+                        <label>Restaurant name</label>
+                        <input name="restaurant" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Address</label>
+                        <input name="address" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Phone</label>
+                        <input name="phone">
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <input name="email">
+                    </div>
+
+                    <div class="field">
+                        <label>Opening hours</label>
+                        <input name="hours">
+                    </div>
+
+                    <button class="pill dark">Save restaurant details</button>
+
+                </form>
+            </div>
+
+            <div id="ordersAdmin" style="display:none">
+                <div id="ordersList"></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
